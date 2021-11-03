@@ -1,0 +1,5 @@
+$NombreOU=Read-Host 'Introduce nombre OU'
+$UbiOU=Read-Host 'Introduce donde quieres crear la OU'
+
+
+New-ADOrganizationalUnit -Name "$NombreOU" -Path "$UbiOU"
