@@ -1,0 +1,15 @@
+#Para introducir fichero CSV con las OU.
+$fichero_csv=Read-Host "Introducir fichero csv de los OU:"
+#
+#
+$fichero_csv_importado = import-csv -Path $fichero_csv -Delimiter :
+foreach($linea_leida in $fichero_csv_importado)
+#
+
+{
+$name=$linea_leida.name
+$path=$linea_leida.path
+
+New-ADOrganizationalUnit -name $name -path $path
+
+}
