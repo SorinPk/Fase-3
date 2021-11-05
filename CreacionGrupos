@@ -1,0 +1,25 @@
+$dominio=Read-Host 'Introducir dominio sin sufijo:'
+$sufijo=Read-Host 'Introducir sufijo del dominio:'   #general-san-gva.es
+
+$dc="dc="+$dominio+",dc="+$sufijo
+#"dc="+$subdominio+
+
+
+$fichero_csv=Read-Host "Introducir fichero csv de los OU:"
+#
+#
+$fichero_csv_importado = import-csv -Path $fichero_csv -Delimiter :
+foreach($linea_leida in $fichero_csv_importado)
+
+
+{
+$rutaContenedor=$linea_leida.path+$dc 
+$name=$linea_leida.name
+$CatGrupo=$linea_leida.GroupCategory
+$scope=$linea_leida.GroupScope
+
+
+
+
+ New-ADGroup -Name $name -GroupCategory $CatGrupo -GroupScope $scope -Path $rutaContenedor
+ }
